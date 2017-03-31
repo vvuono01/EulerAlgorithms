@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/EulerAlgorithms.iml" filepath="$PROJECT_DIR$/.idea/EulerAlgorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EulerAlgorithms/playground/src/main/main.iml" filepath="$PROJECT_DIR$/EulerAlgorithms/playground/src/main/main.iml" />
     </modules>
   </component>
 </project>
