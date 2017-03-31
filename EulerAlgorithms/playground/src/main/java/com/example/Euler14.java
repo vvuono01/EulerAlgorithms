@@ -8,7 +8,10 @@ public class Euler14 {
     private static Map<Long, Long> lengths;
 
     public static void main(String[] args) {
+        long startMillis = System.currentTimeMillis();
         System.out.println(longestCollatzChainUnder(1000000));
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static int longestCollatzChainUnder(int limit) {

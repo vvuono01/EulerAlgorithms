@@ -4,7 +4,10 @@ import java.math.BigInteger;
 
 public class Euler16 {
     public static void main(String[] args) {
+        long startMillis = System.currentTimeMillis();
         System.out.println(sumOfDigitsOfPowerOf2(1000));
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static int sumOfDigitsOfPowerOf2(int power) {

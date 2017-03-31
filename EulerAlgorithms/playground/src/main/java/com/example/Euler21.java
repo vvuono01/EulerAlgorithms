@@ -4,8 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Euler21 {
+    private static final int SIZE = 10000;
+    private static int[] dValues = new int[SIZE];
+
     public static void main(String[] args) {
-        System.out.println(sumOfAmicableNumbersUnder(10000));
+        long startMillis = System.currentTimeMillis();
+        System.out.println(sumOfAmicableNumbersUnder(SIZE));
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static int sumOfAmicableNumbersUnder(int n) {
@@ -13,7 +19,7 @@ public class Euler21 {
         for (int a = 1; a < n; a++) {
             if (!amicableNumbers.contains(a)) {
                 int b = d(a);
-                if (a != b && d(b) == a) {
+                if (b < SIZE && a != b && d(b) == a) {
                     amicableNumbers.add(a);
                     amicableNumbers.add(b);
                 }
@@ -24,7 +30,11 @@ public class Euler21 {
     }
 
     private static int d(int n) {
-        return sum(properDivisors(n));
+        if (dValues[n] == 0) {
+            dValues[n] = sum(properDivisors(n));
+        }
+
+        return dValues[n];
     }
 
     private static List<Integer> properDivisors(int n) {

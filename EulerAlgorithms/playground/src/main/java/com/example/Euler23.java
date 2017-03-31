@@ -10,7 +10,10 @@ public class Euler23 {
     private static final int SUM_UPPER_BOUND = 28123;
 
     public static void main(String[] args) {
+        long startMillis = System.currentTimeMillis();
         System.out.println(sumOfAllIntegersThatCannotBeWrittenAsSumOfTwoAbundantNumbers());
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static long sumOfAllIntegersThatCannotBeWrittenAsSumOfTwoAbundantNumbers() {

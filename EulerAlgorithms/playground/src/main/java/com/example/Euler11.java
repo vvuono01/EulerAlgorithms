@@ -28,7 +28,10 @@ public class Euler11 {
     };
 
     public static void main(String[] args) throws IOException {
+        long startMillis = System.currentTimeMillis();
         System.out.println(greatestAdjacentProduct(input, 4));
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static long greatestAdjacentProduct(int[][] grid, int numAdajacentNumbers) {

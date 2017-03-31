@@ -15,7 +15,10 @@ public class Euler19 {
     private static int[] DAYS_PER_MONTH = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     public static void main(String[] args) {
+        long startMillis = System.currentTimeMillis();
         System.out.println(numSundaysIn20thCentury());
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static int numSundaysIn20thCentury() {

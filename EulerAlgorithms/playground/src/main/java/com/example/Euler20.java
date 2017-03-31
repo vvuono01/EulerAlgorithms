@@ -4,7 +4,10 @@ import java.math.BigInteger;
 
 public class Euler20 {
     public static void main(String[] args) {
+        long startMillis = System.currentTimeMillis();
         System.out.println(sumOfDigitsOfFactorial(100));
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static BigInteger sumOfDigitsOfFactorial(int n) {

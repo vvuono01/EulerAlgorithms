@@ -7,7 +7,10 @@ public class Euler17 {
     private static int[] teensLetters = new int[] { 3, 6, 6, 8, 8, 7, 7, 9, 8, 8 };
 
     public static void main(String[] args) {
+        long startMillis = System.currentTimeMillis();
         System.out.println(numberOfLettersInWordStringUpTo(1000));
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static int numberOfLettersInWordStringUpTo(int num) {

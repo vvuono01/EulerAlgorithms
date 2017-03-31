@@ -2,7 +2,10 @@ package com.example;
 
 public class Euler12 {
     public static void main(String[] args) {
+        long startMillis = System.currentTimeMillis();
         System.out.println(smallestTriangleNumberWithOverNFactors(500));
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static int smallestTriangleNumberWithOverNFactors(int n) {

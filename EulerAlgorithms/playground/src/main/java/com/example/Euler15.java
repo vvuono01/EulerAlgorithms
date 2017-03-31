@@ -4,7 +4,10 @@ import java.math.BigInteger;
 
 public class Euler15 {
     public static void main(String[] args) {
+        long startMillis = System.currentTimeMillis();
         System.out.println(numberOfPathsThroughGridOfSize(20));
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static BigInteger numberOfPathsThroughGridOfSize(int gridSize) {

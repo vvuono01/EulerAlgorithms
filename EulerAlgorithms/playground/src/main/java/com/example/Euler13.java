@@ -105,7 +105,10 @@ public class Euler13 {
     };
 
     public static void main(String[] args) {
+        long startMillis = System.currentTimeMillis();
         System.out.println(firstNDigitsOfSum(input, 10));
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static String firstNDigitsOfSum(String[] input, int n) {

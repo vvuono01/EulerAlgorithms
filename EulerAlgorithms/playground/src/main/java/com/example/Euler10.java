@@ -2,7 +2,10 @@ package com.example;
 
 public class Euler10 {
     public static void main(String[] args) {
+        long startMillis = System.currentTimeMillis();
         System.out.println(sumOfPrimesBelow(2000000));
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static long sumOfPrimesBelow(int n) {

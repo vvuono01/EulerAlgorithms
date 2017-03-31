@@ -243,7 +243,10 @@ public class Euler22 {
             "FRANKLYN","EDMUNDO","SID","PORTER","LEIF","JERAMY","BUCK","WILLIAN","VINCENZO","SHON","LYNWOOD","JERE","HAI","ELDEN","DORSEY","DARELL","BRODERICK","ALONSO" };
 
     public static void main(String[] args) {
+        long startMillis = System.currentTimeMillis();
         System.out.println(nameScoreTotal());
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Solved in " + (endMillis - startMillis) + " ms");
     }
 
     private static long nameScoreTotal() {
