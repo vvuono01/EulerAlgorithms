@@ -18,7 +18,7 @@ public class Euler27 {
         int bestB = 0;
         int bestNumPrimes = 0;
         for (int a = -limit + 1; a < limit; a++) {
-            for (int b = -limit; b <= limit; b++) {
+            for (int b = -limit + 1; b <= limit; b += 2) {
                 int n = 0;
                 while (isPrime(Math.abs(result(n, a, b)))) {
                     n++;
@@ -28,8 +28,6 @@ public class Euler27 {
                     bestA = a;
                     bestB = b;
                     bestNumPrimes = n;
-
-                    System.out.println("New best pair! a = " + bestA + ", b = " + bestB + ", numPrimes = " + n);
                 }
             }
         }
