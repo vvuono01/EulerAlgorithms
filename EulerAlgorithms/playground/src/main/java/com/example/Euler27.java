@@ -17,7 +17,7 @@ public class Euler27 {
         int bestA = 0;
         int bestB = 0;
         int bestNumPrimes = 0;
-        for (int a = -limit + 1; a < limit; a++) {
+        for (int a = -limit + 1; a < limit; a += 2) {
             for (int b = -limit + 1; b <= limit; b += 2) {
                 int n = 0;
                 while (isPrime(Math.abs(result(n, a, b)))) {
