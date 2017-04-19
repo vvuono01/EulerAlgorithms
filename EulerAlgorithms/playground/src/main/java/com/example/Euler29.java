@@ -1,8 +1,8 @@
 package com.example;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Euler29 {
     public static void main(String[] args) {
@@ -13,13 +13,11 @@ public class Euler29 {
     }
 
     private static int numberOfDistinctTermsInExponentialSequence(int limit) {
-        List<BigInteger> sequence = new ArrayList<>();
+        Set<BigInteger> sequence = new LinkedHashSet<>();
         for (int a = 2; a <= limit; a++) {
             for (int b = 2; b <= limit; b++) {
                 BigInteger term = BigInteger.valueOf(a).pow(b);
-                if (!sequence.contains(term)) {
-                    sequence.add(term);
-                }
+                sequence.add(term);
             }
         }
 
