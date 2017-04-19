@@ -16,7 +16,12 @@ public class Euler30 {
             int num = i;
             int digitSum = 0;
             while (num > 0 && digitSum <= i) {
-                digitSum += Math.pow(num % 10, 5);
+                int digit = num % 10;
+                int digitPow = digit;
+                for (int pow = 1; pow < 5; pow++) {
+                    digitPow *= digit;
+                }
+                digitSum += digitPow;
                 num /= 10;
             }
 
