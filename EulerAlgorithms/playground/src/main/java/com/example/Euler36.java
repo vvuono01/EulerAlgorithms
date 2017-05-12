@@ -12,20 +12,12 @@ public class Euler36 {
     private static long sumOfPalindromesUnder(int n) {
         long sum = 0;
         for (int i = 1; i < n; i++) {
-            if (isPalindromeInDecimal(i) && isPalindromeInBinary(i)) {
+            if (isPalindrome(Integer.toString(i)) && isPalindrome(Integer.toBinaryString(i))) {
                 sum += i;
             }
         }
 
         return sum;
-    }
-
-    private static boolean isPalindromeInDecimal(int n) {
-        return isPalindrome(String.valueOf(n));
-    }
-
-    private static boolean isPalindromeInBinary(int n) {
-        return isPalindrome(Integer.toBinaryString(n));
     }
 
     private static boolean isPalindrome(String s) {
