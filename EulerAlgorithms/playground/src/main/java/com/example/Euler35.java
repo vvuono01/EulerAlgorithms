@@ -19,7 +19,9 @@ public class Euler35 {
         Set<Integer> circularPrimes = new HashSet<>();
         circularPrimes.add(2);
         circularPrimes.add(3);
-        for (int i = 5; i < n; i += 6) {
+        circularPrimes.add(5);
+        circularPrimes.add(7);
+        for (int i = 11; i < n; i += 6) {
             if (isPrime(i)) {
                 addCircularValuesToList(circularPrimes, i);
             }
@@ -32,25 +34,30 @@ public class Euler35 {
     }
 
     private static void addCircularValuesToList(Set<Integer> circularPrimes, int prime) {
-        if (!circularPrimes.contains(prime) && !String.valueOf(prime).contains("0")) {
-            Set<Integer> currentNumbers = new HashSet<>();
-            currentNumbers.add(prime);
-            int currentRotation = getNextRotation(prime);
-            if (currentRotation != prime) {
-                boolean isCircular;
-                do {
-                    isCircular = isPrime(currentRotation);
-                    if (isCircular) {
-                        currentNumbers.add(currentRotation);
-                    }
-                    currentRotation = getNextRotation(currentRotation);
-                } while (isCircular && !currentNumbers.contains(currentRotation));
+        if (!circularPrimes.contains(prime)) {
+            String primeString = String.valueOf(prime);
+            if (!primeString.contains("0") &&
+                !primeString.contains("2") &&
+                !primeString.contains("5")) {
+                Set<Integer> currentNumbers = new HashSet<>();
+                currentNumbers.add(prime);
+                int currentRotation = getNextRotation(prime);
+                if (currentRotation != prime) {
+                    boolean isCircular;
+                    do {
+                        isCircular = isPrime(currentRotation);
+                        if (isCircular) {
+                            currentNumbers.add(currentRotation);
+                        }
+                        currentRotation = getNextRotation(currentRotation);
+                    } while (isCircular && !currentNumbers.contains(currentRotation));
 
-                if (currentNumbers.size() == String.valueOf(prime).length()) {
-                    circularPrimes.addAll(currentNumbers);
+                    if (currentNumbers.size() == String.valueOf(prime).length()) {
+                        circularPrimes.addAll(currentNumbers);
+                    }
+                } else {
+                    circularPrimes.add(prime);
                 }
-            } else {
-                circularPrimes.add(prime);
             }
         }
     }
