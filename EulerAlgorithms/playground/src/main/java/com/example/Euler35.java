@@ -14,53 +14,44 @@ public class Euler35 {
     }
 
     private static long numberOfCircularPrimesBelow(int n) {
-        List<Integer> primes = getPrimesBelow(n);
         List<Integer> circularPrimes = new ArrayList<>();
+        circularPrimes.add(2);
+        circularPrimes.add(3);
+        for (int i = 5; i < n; i += 6) {
+            if (isPrime(i)) {
+                addCircularValuesToList(circularPrimes, i);
+            }
 
-        for (int i = 0; i < primes.size(); i++) {
-            int prime = primes.get(i);
-            if (!circularPrimes.contains(prime) && !String.valueOf(prime).contains("0")) {
-                List<Integer> currentNumbers = new ArrayList<>();
-                currentNumbers.add(prime);
-                int currentRotation = getNextRotation(prime);
-                if (currentRotation != prime) {
-                    boolean isCircular;
-                    do {
-                        isCircular = isPrime(currentRotation);
-                        if (isCircular) {
-                            currentNumbers.add(currentRotation);
-                        }
-                        currentRotation = getNextRotation(currentRotation);
-                    } while (isCircular && !currentNumbers.contains(currentRotation));
-
-                    if (currentNumbers.size() == String.valueOf(prime).length()) {
-                        circularPrimes.addAll(currentNumbers);
-                    }
-                } else {
-                    circularPrimes.add(prime);
-                }
+            if (isPrime(i + 2)) {
+                addCircularValuesToList(circularPrimes, i + 2);
             }
         }
         return circularPrimes.size();
     }
+    
+    private static void addCircularValuesToList(List<Integer> circularPrimes, int prime) {
+        if (!circularPrimes.contains(prime) && !String.valueOf(prime).contains("0")) {
+            List<Integer> currentNumbers = new ArrayList<>();
+            currentNumbers.add(prime);
+            int currentRotation = getNextRotation(prime);
+            if (currentRotation != prime) {
+                boolean isCircular;
+                do {
+                    isCircular = isPrime(currentRotation);
+                    if (isCircular) {
+                        currentNumbers.add(currentRotation);
+                    }
+                    currentRotation = getNextRotation(currentRotation);
+                } while (isCircular && !currentNumbers.contains(currentRotation));
 
-    private static List<Integer> getPrimesBelow(int n) {
-        List<Integer> primes = new ArrayList<>();
-        primes.add(2);
-        primes.add(3);
-        for (int i = 5; i < n; i += 6) {
-            if (isPrime(i)) {
-                primes.add(i);
-            }
-
-            if (isPrime(i + 2)) {
-                primes.add(i + 2);
+                if (currentNumbers.size() == String.valueOf(prime).length()) {
+                    circularPrimes.addAll(currentNumbers);
+                }
+            } else {
+                circularPrimes.add(prime);
             }
         }
-
-        return primes;
     }
-
 
     private static boolean isPrime(int n) {
         if (n > 1 && n <= 3) {
