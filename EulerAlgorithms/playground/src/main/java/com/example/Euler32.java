@@ -15,22 +15,22 @@ public class Euler32 {
 
     private static long sumOfPandigitalIdentities() {
         long sum = 0;
-        for (int l1 = 1; l1 <= 9; l1++) {
-            for (int l2 = 1; l2 <= 9; l2++) {
-                for (int r1 = 1; r1 <= 9; r1++) {
-                    for (int r2 = 1; r2 <= 9; r2++) {
-                        for (int r3 = 1; r3 <= 9; r3++) {
-                            if (!(l1 == l2 || l1 == r1 || l1 == r2 || l1 == r3 ||
-                                  l2 == r1 || l2 == r2 || l2 == r3 ||
-                                  r1 == r2 || r1 == r3 ||
-                                  r2 == r3)) {
+        for (int d1 = 1; d1 <= 9; d1++) {
+            for (int d2 = 1; d2 <= 9; d2++) {
+                for (int d3 = 1; d3 <= 9; d3++) {
+                    for (int d4 = 1; d4 <= 9; d4++) {
+                        for (int d5 = 1; d5 <= 9; d5++) {
+                            if (!(d1 == d2 || d1 == d3 || d1 == d4 || d1 == d5 ||
+                                  d2 == d3 || d2 == d4 || d2 == d5 ||
+                                  d3 == d4 || d3 == d5 ||
+                                  d4 == d5)) {
 
                                 List<Integer> digits = new ArrayList<>();
-                                digits.add(l1);
-                                digits.add(l2);
-                                digits.add(r1);
-                                digits.add(r2);
-                                digits.add(r3);
+                                digits.add(d1);
+                                digits.add(d2);
+                                digits.add(d3);
+                                digits.add(d4);
+                                digits.add(d5);
 
                                 int product = pandigitalValue(digits, true);
                                 if (product != 0 && !products.contains(product)) {
@@ -76,7 +76,6 @@ public class Euler32 {
         }
 
         if (digits.size() == 9) {
-            System.out.println(leftNum + " x " + rightNum + " = " + product);
             return product;
         }
 
