@@ -2,7 +2,9 @@ package com.example;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Euler35 {
 
@@ -14,7 +16,7 @@ public class Euler35 {
     }
 
     private static long numberOfCircularPrimesBelow(int n) {
-        List<Integer> circularPrimes = new ArrayList<>();
+        Set<Integer> circularPrimes = new HashSet<>();
         circularPrimes.add(2);
         circularPrimes.add(3);
         for (int i = 5; i < n; i += 6) {
@@ -28,10 +30,10 @@ public class Euler35 {
         }
         return circularPrimes.size();
     }
-    
-    private static void addCircularValuesToList(List<Integer> circularPrimes, int prime) {
+
+    private static void addCircularValuesToList(Set<Integer> circularPrimes, int prime) {
         if (!circularPrimes.contains(prime) && !String.valueOf(prime).contains("0")) {
-            List<Integer> currentNumbers = new ArrayList<>();
+            Set<Integer> currentNumbers = new HashSet<>();
             currentNumbers.add(prime);
             int currentRotation = getNextRotation(prime);
             if (currentRotation != prime) {
