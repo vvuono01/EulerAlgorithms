@@ -1,0 +1,2 @@
+include ':playground'
+project(':playground').projectDir = new File('EulerAlgorithms/playground')
