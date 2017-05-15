@@ -1,8 +1,7 @@
 package com.example;
 
 public class Euler37 {
-    // https://en.wikipedia.org/wiki/Truncatable_prime
-    private static final long UPPER_BOUND = 73939133;
+    private static final long UPPER_BOUND = 1000000;
 
     public static void main(String[] args) {
         long startMillis = System.currentTimeMillis();
