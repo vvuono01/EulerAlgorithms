@@ -29,7 +29,7 @@ public class Euler38 {
         for (int i = 1; i <= n; i++) {
             concatenation += Integer.toString(integer * i);
             if (concatenation.length() > 9) {
-                break;
+                return 0;
             }
         }
 
@@ -37,6 +37,10 @@ public class Euler38 {
     }
 
     private static boolean isPandigital(long value) {
+        if (Long.toString(value).length() != 9) {
+            return false;
+        }
+
         List<Integer> digits = new ArrayList<>();
         long tracker = value;
         while (tracker > 0) {
