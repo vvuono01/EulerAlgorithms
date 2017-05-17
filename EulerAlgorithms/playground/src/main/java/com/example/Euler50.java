@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Euler50 {
@@ -12,47 +13,44 @@ public class Euler50 {
     }
 
     private static long primeThatCanBeWrittenAsTheSumOfTheMostConsecutivePrimes(int limit) {
-        List<Integer> primes = new ArrayList<>();
-        primes.add(2);
-        primes.add(3);
-        for (int i = 5; i <= 10000; i += 6) {
+        List<Long> primeList = new ArrayList<>();
+        primeList.add(2l);
+        primeList.add(3l);
+        for (long i = 5; i <= 1000000; i += 6) {
             if (isPrime(i)) {
-                primes.add(i);
+                primeList.add(i);
             }
 
             if (isPrime(i+2)) {
-                primes.add(i+2);
+                primeList.add(i+2);
             }
         }
 
-        int largestPrime = 593;
-        int sum = 0;
-        for (int i = 0; i < primes.size(); i++) {
-            sum += primes.get(i);
+        Long[] primes = primeList.toArray(new Long[primeList.size()]);
 
-            if (sum > largestPrime) {
-                if (isPrime(sum)) {
-                    largestPrime = sum;
-                    if (largestPrime > limit) {
-                        break;
-                    }
+        int numberOfPrimes = 0;
+        long result = 0;
+        long[] primeSum = new long[primes.length+1];
+        primeSum[0] = 0;
+        for (int i = 0; i < primes.length; i++) {
+            primeSum[i+1] = primeSum[i] + primes[i];
+        }
+
+        for (int i = numberOfPrimes; i < primeSum.length; i++) {
+            for (int j = i-(numberOfPrimes+1); j >= 0; j--) {
+                if (primeSum[i] - primeSum[j] > limit) break;
+
+                if (Arrays.binarySearch(primes, primeSum[i] - primeSum[j]) >= 0) {
+                    numberOfPrimes = i - j;
+                    result = primeSum[i] - primeSum[j];
                 }
             }
         }
 
-        for (int i = 0; i < primes.size(); i++) {
-            largestPrime -= primes.get(i);
-            if (isPrime(largestPrime)) {
-                if (largestPrime < limit) {
-                    break;
-                }
-            }
-        }
-
-        return largestPrime;
+        return result;
     }
 
-    private static boolean isPrime(int n) {
+    private static boolean isPrime(long n) {
         if (n <= 1) {
             return false;
         } else if (n > 1 && n <= 3) {
