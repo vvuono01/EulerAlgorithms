@@ -17,7 +17,7 @@ public class Euler47 {
         List<Integer> primes = new ArrayList<>();
         primes.add(2);
         primes.add(3);
-        for (int i = 5; i <= 100000; i += 6) {
+        for (int i = 5; i <= 1000; i += 6) {
             if (isPrime(i)) {
                 primes.add(i);
             }
