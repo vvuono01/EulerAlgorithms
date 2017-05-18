@@ -3,6 +3,8 @@ package com.example;
 import java.math.BigInteger;
 
 public class Euler53 {
+    private static BigInteger[] factorials = new BigInteger[101];
+
     public static void main(String[] args) {
         long startMillis = System.currentTimeMillis();
         System.out.println(combinatoricSelectionsGreaterThan(100, 1000000));
@@ -28,11 +30,15 @@ public class Euler53 {
     }
 
     private static BigInteger factorial(int n) {
-        BigInteger ret = BigInteger.valueOf(1);
-        for (int i = 2; i <= n; i++) {
-            ret = ret.multiply(BigInteger.valueOf(i));
+        if (factorials[n] == null) {
+            BigInteger ret = BigInteger.valueOf(1);
+            for (int i = 2; i <= n; i++) {
+                ret = ret.multiply(BigInteger.valueOf(i));
+            }
+
+            factorials[n] = ret;
         }
 
-        return ret;
+        return factorials[n];
     }
 }
