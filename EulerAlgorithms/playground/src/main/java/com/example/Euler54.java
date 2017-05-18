@@ -1075,7 +1075,7 @@ public class Euler54 {
                 return 1000;
             }
 
-            return 900;
+            return 900 + values[4];
         }
 
         if (frontPair != 0 && backPair != 0 && (values[0] == values[3] || values[1] == values[4])) {
@@ -1090,11 +1090,11 @@ public class Euler54 {
         }
 
         if (isFlush) {
-            return 600;
+            return 600 + values[4];
         }
 
         if (isStraight) {
-            return 500;
+            return 500 + values[4];
         }
 
         if (threeOfAKind != 0) {
