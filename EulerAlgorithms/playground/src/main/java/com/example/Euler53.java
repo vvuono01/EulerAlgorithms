@@ -13,6 +13,11 @@ public class Euler53 {
     }
 
     private static long combinatoricSelectionsGreaterThan(int nLimit, int threshold) {
+        factorials[0] = BigInteger.ONE;
+        for (int i = 1; i <= nLimit; i++) {
+            factorials[i] = factorials[i-1].multiply(BigInteger.valueOf(i));
+        }
+
         int count = 0;
         for (int n = 23; n <= nLimit; n++) {
             for (int r = 0; r <= n; r++) {
@@ -26,19 +31,6 @@ public class Euler53 {
     }
 
     private static BigInteger nChooseR(int n, int r) {
-        return factorial(n).divide(factorial(r).multiply(factorial(n-r)));
-    }
-
-    private static BigInteger factorial(int n) {
-        if (factorials[n] == null) {
-            BigInteger ret = BigInteger.valueOf(1);
-            for (int i = 2; i <= n; i++) {
-                ret = ret.multiply(BigInteger.valueOf(i));
-            }
-
-            factorials[n] = ret;
-        }
-
-        return factorials[n];
+        return factorials[n].divide(factorials[r].multiply(factorials[n-r]));
     }
 }
