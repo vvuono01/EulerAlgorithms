@@ -1,10 +1,15 @@
 package com.example;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class Euler54 {
+    private static final int ACE = 14;
+    private static final int KING = 13;
+    private static final int QUEEN = 12;
+    private static final int JACK = 11;
+    private static final int TEN = 10;
+
     private static String[][] input = {
         {"8C", "TS", "KC", "9H", "4S", "7D", "2S", "5D", "3S", "AC"},
         {"5C", "AD", "5D", "AC", "9C", "7C", "5H", "8D", "TD", "KS"},
@@ -1018,10 +1023,10 @@ public class Euler54 {
     private static long numberOfGamesWonByPlayer1() {
         int count = 0;
         for (String[] game : input) {
-            if (winnerOfGame(game) == 1) {
+            int winner = winnerOfGame(game);
+            if (winner == 1) {
                 count++;
             }
-            System.out.println();
         }
         return count;
     }
@@ -1030,33 +1035,114 @@ public class Euler54 {
         String[] player1Hand = {game[0], game[1], game[2], game[3], game[4]};
         String[] player2Hand = {game[5], game[6], game[7], game[8], game[9]};
 
-        return (rank(player1Hand) > rank(player2Hand)) ? 1 : 2;
+        Arrays.sort(player1Hand, new CardComparator());
+        Arrays.sort(player2Hand, new CardComparator());
+
+        int rank1 = rank(player1Hand);
+        int rank2 = rank(player2Hand);
+        return (rank1 > rank2) ? 1 : 2;
     }
 
     private static int rank(String[] hand) {
-        Arrays.sort(hand, new CardComparator());
+        int[] values = {value(hand[0]),
+                        value(hand[1]),
+                        value(hand[2]),
+                        value(hand[3]),
+                        value(hand[4])};
+        char[] suits = {hand[0].charAt(1),
+                        hand[1].charAt(1),
+                        hand[2].charAt(1),
+                        hand[3].charAt(1),
+                        hand[4].charAt(1)};
 
-        char card1Suit = hand[0].charAt(1);
-        boolean isFlush = card1Suit == hand[1].charAt(1) &&
-                            card1Suit == hand[2].charAt(1) &&
-                            card1Suit == hand[3].charAt(1) &&
-                            card1Suit == hand[4].charAt(1);
+        boolean isFlush = suits[0] == suits[1] &&
+                          suits[0] == suits[2] &&
+                          suits[0] == suits[3] &&
+                          suits[0] == suits[4];
+        boolean isStraight = values[4] == values[3] + 1 &&
+                             values[3] == values[2] + 1 &&
+                             values[2] == values[1] + 1 &&
+                             values[1] == values[0] + 1;
 
-        
+        int frontPair = (values[1] == values[0] ? values[1] : (values[1] == values[2] ? values[2] : 0));
+        int backPair = (values[3] == values[2] ? values[3] : (values[3] == values[4] ? values[4] : 0));
+        int threeOfAKind = values[2] == values[1] && values[2] == values[0] ? values[2] :
+                            (values[2] == values[3] && values[2] == values[4] ? values[4] :
+                            (values[2] == values[1] && values[2] == values[3] ? values[3] : 0));
 
-        return 0;
+        if (isFlush && isStraight) {
+            if (values[4] == ACE) {
+                return 1000;
+            }
+
+            return 900;
+        }
+
+        if (frontPair != 0 && backPair != 0 && (values[0] == values[3] || values[1] == values[4])) {
+            return 800 + backPair;
+        }
+
+        if (threeOfAKind != 0) {
+            if ((values[0] == values[1] && values[0] != values[2]) ||
+                (values[3] == values[4] && values[3] != values[2])) {
+                return 700 + threeOfAKind;
+            }
+        }
+
+        if (isFlush) {
+            return 600;
+        }
+
+        if (isStraight) {
+            return 500;
+        }
+
+        if (threeOfAKind != 0) {
+            return 400 + threeOfAKind;
+        }
+
+        if (frontPair != 0 && backPair != 0) {
+            return 300 + backPair;
+        }
+
+        if (frontPair != 0 || backPair != 0) {
+            return 200 + frontPair + backPair;
+        }
+
+        return 100 + values[4];
+    }
+
+    private static int value(String card) {
+        char value = card.charAt(0);
+        switch (value) {
+            case 'T':
+                return TEN;
+            case 'J':
+                return JACK;
+            case 'Q':
+                return QUEEN;
+            case 'K':
+                return KING;
+            case 'A':
+                return ACE;
+        }
+
+        return Character.getNumericValue(value);
     }
 
     private static class CardComparator implements Comparator<String> {
         @Override
         public int compare(String s1, String s2) {
-            String numeric1 = s1.replace("T", "10").replace("J", "11").replace("Q", "12").replace("K", "13").replace("A", "14");
-            String numeric2 = s2.replace("T", "10").replace("J", "11").replace("Q", "12").replace("K", "13").replace("A", "14");
+            int value1 = value(s1);
+            int value2 = value(s2);
 
-            Integer number1 = Integer.valueOf(numeric1.substring(0, numeric1.length() - 1));
-            Integer number2 = Integer.valueOf(numeric2.substring(0, numeric2.length() - 1));
+            if (value1 > value2) {
+                return 1;
+            } else if (value1 < value2) {
+                return -1;
+            }
 
-            return number1.compareTo(number2);
+            return s1.compareTo(s2);
         }
     }
 }
