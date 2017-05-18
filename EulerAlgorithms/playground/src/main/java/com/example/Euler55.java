@@ -22,7 +22,7 @@ public class Euler55 {
 
     private static boolean isLychrelNumber(int n) {
         BigInteger num = BigInteger.valueOf(n);
-        for (int i = 1; i < 30; i++) {
+        for (int i = 1; i < 25; i++) {
             String reverseNumString = new StringBuilder(num.toString()).reverse().toString();
             BigInteger reverseNum = BigInteger.valueOf(Long.parseLong(reverseNumString));
             num = num.add(reverseNum);
